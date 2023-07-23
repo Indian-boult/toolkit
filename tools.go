@@ -42,6 +42,16 @@ type UploadedFile struct {
 	FileSize         int64
 }
 
+// UploadOneFile uploads a single file from the given http.Request to the specified upload directory.
+//
+// Parameters:
+// - r: The http.Request containing the file to upload.
+// - uploadDir: The directory where the uploaded file will be stored.
+// - rename: An optional boolean flag indicating whether to rename the uploaded file.
+//
+// Returns:
+// - *UploadedFile: The uploaded file information.
+// - error: An error if the upload fails.
 func (t *Tools) UploadOneFile(r *http.Request, uploadDir string, rename ...bool) (*UploadedFile, error) {
 	renameFile := true
 	if len(rename) > 0 {
@@ -56,6 +66,17 @@ func (t *Tools) UploadOneFile(r *http.Request, uploadDir string, rename ...bool)
 	return files[0], nil
 }
 
+// UploadFiles uploads files from a request to the specified upload directory.
+// It allows for optional file renaming.
+//
+// Parameters:
+// - r: the http.Request object containing the files
+// - uploadDir: the directory to upload the files to
+// - rename: optional boolean value indicating whether to rename the files
+//
+// Return:
+// - []*UploadedFile: a slice of UploadedFile pointers representing the uploaded files
+// - error: an error if any occurred during the file upload process
 func (t *Tools) UploadFiles(r *http.Request, uploadDir string, rename ...bool) ([]*UploadedFile, error) {
 	renameFile := true
 	if len(rename) > 0 {

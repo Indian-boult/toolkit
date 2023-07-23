@@ -51,6 +51,20 @@ var uploadTests = []struct {
 	},
 }
 
+// TestTools_UploadFiles is a unit test for the UploadFiles function.
+//
+// It tests the functionality of the UploadFiles function by setting up a pipe
+// to avoid buffering, creating form data field 'file', opening and decoding an
+// image file, and encoding it as PNG. It then reads from the pipe to receive
+// data and makes a POST request with the received data. Finally, it tests the
+// functionality of the UploadFiles function by checking if the uploaded files
+// exist and cleaning up.
+//
+// Parameters:
+// - t: *testing.T - the testing.T object for the test.
+//
+// Return type:
+// - none
 func TestTools_UploadFiles(t *testing.T) {
 	for _, e := range uploadTests {
 		// set up a pipe to avoid buffering
@@ -114,6 +128,14 @@ func TestTools_UploadFiles(t *testing.T) {
 
 }
 
+// TestTools_UploadOneFile is a test function that uploads a single file.
+//
+// The function sets up a pipe to avoid buffering and creates a multipart writer.
+// It creates a form data field 'file' and opens the file to be uploaded.
+// It decodes the image and encodes it as a PNG.
+// It reads from the pipe which receives the data and sets the request header.
+// It calls the UploadOneFile method of the Tools struct to upload the file.
+// It checks if the uploaded file exists and cleans up afterwards.
 func TestTools_UploadOneFile(t *testing.T) {
 	// set up a pipe to avoid buffering
 	pr, pw := io.Pipe()
